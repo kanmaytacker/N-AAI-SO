@@ -1,0 +1,1414 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{subcaption}
+\usepackage{bm}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\graphicspath{ {./media/} }
+\usepackage[backend=bibtex, sorting=none]{biblatex}
+\bibliography{search_optimisation} 
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Search \& Optimisation Assignment 2021/22}
+\author{Tanmay Kacker - 372465 \\ tanmay.kacker.465@cranfield.ac.uk \\ Applied Artificial Intelligence MSc - Full Time}
+\date{13th October, 2021}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+		\vspace*{1cm}
+		          
+		\includegraphics[width=1.73333in,height=1.73333in]{image1.png}
+		\vspace{2cm}
+		
+		\Huge
+		\textbf{Search \& Optimisation Assignment 2021/22}
+		          
+		\vspace{0.5cm}
+		\LARGE
+		Tanmay Kacker - 372465 \\                       
+		\Large
+		\vspace{0.5cm}
+		tanmay.kacker.465@cranfield.ac.uk \\
+		Applied Artificial Intelligence MSc - Full Time \\
+		
+		\vspace{0.5cm}
+		
+		13th October, 2021          
+		
+	\end{center}
+\end{titlepage}
+
+\newpage
+
+\hypertarget{contents}{%
+	\section{Contents}\label{contents}}
+
+\protect\hyperlink{_Toc84701452}{1 Introduction 3}
+
+\protect\hyperlink{linear-programming-problem}{2 Linear Programming
+Problem 3}
+
+\protect\hyperlink{problem-description}{2.1 Problem Description 3}
+
+\protect\hyperlink{decision-variables}{2.2 Decision variables 3}
+
+\protect\hyperlink{objective-function}{2.3 Objective function 3}
+
+\protect\hyperlink{problem-constraints}{2.4 Problem constraints 3}
+
+\protect\hyperlink{mathematical-formulation}{2.5 Mathematical
+formulation 3}
+
+\protect\hyperlink{graphical-method}{2.6 Graphical Method 3}
+
+\protect\hyperlink{matlab-implementation}{2.7 Matlab Implementation 3}
+
+\protect\hyperlink{solution}{2.8 Solution 3}
+
+\protect\hyperlink{sensitivity-analysis}{2.9 Sensitivity Analysis 3}
+
+\protect\hyperlink{mixed-integer-programming-problem}{3 Mixed-integer
+Programming Problem 3}
+
+\protect\hyperlink{problem-description-1}{3.1 Problem Description 3}
+
+\protect\hyperlink{_Toc84701465}{3.2 Decision variables 4}
+
+\protect\hyperlink{_Toc84701466}{3.3 Objective function 4}
+
+\protect\hyperlink{problem-constraints-1}{3.4 Problem constraints 4}
+
+\protect\hyperlink{mathematical-formulation-1}{3.5 Mathematical
+formulation 4}
+
+\protect\hyperlink{matlab-implementation-1}{3.6 Matlab Implementation 4}
+
+\protect\hyperlink{solution-1}{3.7 Solution 4}
+
+\protect\hyperlink{sensitivity-analysis-1}{3.8 Sensitivity Analysis 4}
+
+\protect\hyperlink{non-linear-programming-problem}{4 Non-Linear
+Programming Problem 4}
+
+\protect\hyperlink{problem-description-2}{4.1 Problem Description 4}
+
+\protect\hyperlink{_Toc84701474}{4.2 Decision variables 4}
+
+\protect\hyperlink{_Toc84701475}{4.3 Objective function 4}
+
+\protect\hyperlink{problem-constraints-2}{4.4 Problem constraints 4}
+
+\protect\hyperlink{mathematical-formulation-2}{4.5 Mathematical
+formulation 4}
+
+\protect\hyperlink{matlab-implementation-2}{4.6 Matlab Implementation 5}
+
+\protect\hyperlink{solution-2}{4.7 Solution 5}
+
+\protect\hyperlink{sensitivity-analysis-2}{4.8 Sensitivity Analysis 5}
+
+\protect\hyperlink{conclusion}{5 Conclusion 5}
+\newpage
+
+\hypertarget{context}{%
+	\section{Context}\label{context}}
+
+Managing a healthy diet while being enrolled in a Master's programme can be hard.
+Since it is a busy schedule, and you have to find time to study, you can't spend a long time cooking, but you can't
+miss out on nutrition as well. The meal has to be affordable as well. 
+
+Students tend to think of creating meals in a way which minimises the amount of money spent on sourcing the ingredients.
+But at the same time one needs to maintain the nutrients and the amount of calories that are obtained from the meal.
+This can be a daunting task for individuals who are not used to cooking in the first place.
+
+The following table lists the daily
+recommended minimum and maximum reference intake values for calories and common nutrients that should be present.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{||c c c|} 
+		\hline
+		Component     & Minimum value & Maximum value \\ [0.5ex] 
+		\hline\hline
+		Energy        & 300 kcal      & 400 kcal      \\ 
+		Carbohydrates & 60g           & -             \\
+		Protein       & 15            & 50g           \\
+		Fat           & 2             & 8g            \\
+		Sodium        & -             & 0.8g          \\ [1ex] 
+		\hline
+	\end{tabular}
+	\caption{Per meal reference intakes for adults \cite{wiseman_1992}}
+	\label{table:1}
+\end{table}
+
+In order to satisfy all of these requirements, I had to resort to an old age Indian meal called Khichdi.
+It is basically an Indian rice and lentil mix which is nutritious and very affordable. It can be cooked extremely fast and is ideal for people
+who are novices when it comes to cooking.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{image2.png}
+	\caption{A bowl of Khichdi}
+\end{figure}
+
+\hypertarget{linear-programming-problem}{%
+	\section{Linear Programming Problem}\label{linear-programming-problem}}
+
+\hypertarget{problem-description}{%
+	\subsection{Problem Description}\label{problem-description}}
+
+In order to prepare Khichdi, you need to mix rice and lentil and cook it.
+250 grams of rice costs 40 pence whereas 250 of lentil costs 70 pence.
+
+It is recommended that the number of calories in dinner are more than 400 and less than 500.
+100 grams of rice has 130 calories whereas 100 grams of lentil has 187 calories.
+
+Apart from calories a meal should have at least 15 grams of protein, 60 grams of carbohydrates.
+100 grams of rice has 3.54 grams of protein whereas 100 grams of lentil has 11.42 grams of protein.
+100 grams of rice has 25.22 grams of carbohydrates whereas 100 grams of lentil has 29.76 grams of carbohydrates.
+
+The meal should also have at least 2 grams of fat and at most 8 grams of fat.
+100 grams of rice has 0.38 grams of fats whereas 100 grams of lentil has 3.08 grams of fat.
+
+A meal should also have at most 800 mg of sodium.
+100 grams of rice has 0.13 grams of sodium whereas 100 grams of lentil has 0.27 grams of sodium.
+
+The problem is to figure out the quantity of rice and lentil that should be added to a portion of Khichdi while minimising the cost and also maintaining the
+recommended amount of calories, carbohydrates, proteins, fats and sodium.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{||c | c | c|} 
+		\hline
+		Nutrient          & Nutrients in Rice (g) & Nutrients in Lentil (g) \\ [0.5ex] 
+		\hline\hline
+		Energy            & 1.3                   & 1.87                    \\ 
+		Carbohydrates     & 0.2522                & 0.2976                  \\
+		Protein           & 0.0354                & 0.1142                  \\
+		Fat               & 0.0038                & 0.0308                  \\
+		Sodium            & 0.00126               & 0.00273                 \\ [1ex] 
+		\hline
+		Energy (kcal / g) & 1.3                   & 1.87                    \\ 
+		\hline
+		Price (£ / g)    & 0.16                  & 0.28                    \\ [1ex] 
+		\hline
+	\end{tabular}
+	\caption{Nutritional density and price per gram of Rice and Lentil}
+	\label{table:2}
+\end{table}
+
+\hypertarget{decision-variables}{%
+	\subsection{Decision variables}\label{decision-variables}}
+
+There are two decision variables in the optimisation problem.
+\begin{enumerate}
+	\item The amount in grams of rice which needs to be consumed and is denoted by \(x_1\)
+	\item The amount in grams of lentil which needs to be consumed and is denoted by \(x_2\)
+\end{enumerate}
+\[ X \in \{Rice, Lentil \}\]
+
+\hypertarget{objective-function}{%
+	\subsection{Objective function}\label{objective-function}}
+
+The objective function is to minimise the total cost of one meal of Khichdi.
+It can be written as the sum of the product of the quantity of the ingredient and the cost of buying 1g of the ingredient.
+\[ \min \quad \sum_{x\in X} c_ix_i \]
+
+The above equation can be simplified to the two decision variables which are used to represent rice and lentil. 
+Putting the cost values of rice and lentil gives us the objective function which needs to be minimised.
+
+\begin{equation}
+	\min \quad cost(x_1, x_2) = Z = 0.0014x_1 + 0.0023x_2
+\end{equation}
+
+\hypertarget{problem-constraints}{%
+	\subsection{Problem constraints}\label{problem-constraints}}
+
+Along with minimising the cost, the meal should suffice the nutritional needs.
+The amount of nutrition in a meal can be written as the sum of the product of the quantity of the ingredient and nutritional density of a nutrient in that ingredient.
+Where nutritional density \(n_{ij}\) is the amount in grams of nutrient \(j\) in a gram of ingredient \(i\).
+\[nutrition(x_i, n_{ij}) = \sum_{x\in X} x_in_{ij} \]
+
+\begin{enumerate}
+	\item \textbf{Non-negativity constraint}:
+	      The quantity of rice and lentil should not be negative, so each variable should have a lower bound of 0.
+	      \begin{equation}
+	      	x_1 > 0
+	      \end{equation}
+	      \begin{equation}
+	      	x_2 > 0
+	      \end{equation}
+	\item \textbf{Calorie constraints}: 
+	      \begin{itemize}
+	      	\item A meal should have at least 400 calories.
+	      	      A gram of rice has 1.3 calories while a gram of lentil has 1.87 calories.
+	      	      \begin{equation}
+	      	      	1.3x_1 + 1.87x_2 \ge 400
+	      	      \end{equation}
+	      	\item A meal should have at most 500 calories
+	      	      \begin{equation}
+	      	      	1.3x_1 + 1.87x_2 \le 500
+	      	      \end{equation}
+	      \end{itemize}
+	\item \textbf{Carbohydrates constraint}:
+	      	      
+	      A meal should have at least 60 grams of carbohydrates. A gram of rice has 0.2522 grams of carbohydrates while a gram of lentil has 0.2976 grams of carbohydrates.
+	      \begin{equation}
+	      	0.2522x_1 + 0.2976x_2 \ge 60
+	      \end{equation}
+	\item \textbf{Protein constraint}:
+	      	      
+	      A meal should have at least 15 grams of proteins. A gram of rice has 0.0354 grams of proteins while a gram of lentil has 0.1142 grams of proteins.
+	      \begin{equation}
+	      	0.0354x_1 + 0.1142x_2 \ge 15
+	      \end{equation}
+	\item \textbf{Fat constraints}: 
+	      \begin{itemize}
+	      	\item A meal should have at least 2 grams of fat.
+	      	      A gram of rice has 0.0038 grams of fat while a gram of lentil has 0.0308 grams of fat.
+	      	      \begin{equation}
+	      	      	0.0038x_1 + 0.0308x_2 \ge 2
+	      	      \end{equation}
+	      	\item A meal should have at most 8 grams of fat.
+	      	      \begin{equation}
+	      	      	0.0038x_1 + 0.0308x_2 \le 8
+	      	      \end{equation}
+	      \end{itemize}
+	\item \textbf{Sodium constraint}:
+	      	      
+	      A meal should have at most 0.8 grams of sodium. A gram of rice has 0.00126 grams of sodium while a gram of lentil has 0.00273 grams of sodium.
+	      \begin{equation}
+	      	0.00126x_1 + 0.00273x_2 \le 0.8
+	      \end{equation}
+\end{enumerate}
+
+\hypertarget{mathematical-formulation}{%
+	\subsection{Mathematical formulations}\label{mathematical-formulation}}
+
+Sets\\
+\begin{tabular}{ll}
+	$X$ & set of ingredients \\
+	$N$ & set of nutrients   \\
+\end{tabular}
+
+Variables\\
+\begin{tabular}{lll}
+	$x_{i}$ & $\forall$ $i\in X$ & grams of ingredient in a meal 
+\end{tabular}
+\setcounter{equation}{0}
+
+Objective
+\begin{align}
+	\min \quad
+	  & Z = 0.0014x_1 + 0.0023x_2 
+\end{align}
+
+Constraints
+\begin{align}
+	1.3x_1 + 1.87x_2 \ge 400        \\
+	1.3x_1 + 1.87x_2 \le 500        \\
+	0.2522x_1 + 0.2976x_2 \ge 60    \\
+	0.0354x_1 + 0.1142x_2 \ge 15    \\
+	0.0038x_1 + 0.0308x_2 \ge 2     \\
+	0.0038x_1 + 0.0308x_2 \le 8     \\
+	0.00126x_1 + 0.00273x_2 \le 0.8 \\
+	x_1 > 0                         \\
+	x_2 > 0                         
+\end{align}
+\setcounter{equation}{0}
+
+\hypertarget{graphical-method}{%
+	\subsection{Graphical Method}\label{graphical-method}}
+
+Since there are only two decision variables, \(x_1\) and \(x_2\), the problem can be graphically
+visualised in two-dimensional space. The graph is constructed using \(x_1\) as the horizontal axis
+and \(x_2\) as the vertical axis. 
+
+All the constraints are plotted on the graph starting with the non-negativity constraints.
+The constraints \(x_1 > 0\) and \(x_2 > 0\) restrict the problem to the positive side of each axis, that is known as the
+first quadrant. Next, all the remaining constraints are plotted on the graph which restrict the solution to the feasible region.
+This is represented with blue in Figure 2 below. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{image3.png}
+	\caption{Graphical representation of the feasible region and the constraints}
+\end{figure}
+
+Once the feasible region has been identified, the point which minimises the value of the objective function needs to be located.
+This is done by rewriting the objective function \(Z = 0.0014x_1 + 0.0023x_2\) in the slope-intercept form which is:
+
+\[ x_2 = \frac{-0.0014x_1 + Z}{0.0023} = -0.6087x_1 + 434.7826Z \]
+
+From the above equation, it can be noted that the slope of the line is -0.6087 and the intercept with \(x_2\) is 434.7826.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{image4.png}
+	\caption{Graphical representation of the feasible region and the constraints}
+\end{figure}
+
+In order to find the point that minimises the objective function, we start to plot lines on the graph by taking values of Z by trial and error.
+Starting with the value of Z as 0.6, it can be seen in Figure 3 that some points lie within the feasible region.
+Since the objective is to minimise Z and the previous trial line was towards the upper bound of the feasible region, the next value of Z should be lesser than 0.6.
+We use 0.4 as the next trial value for Z and plot the line \(Z = 0.4 = 0.0014x_1 + 0.0023x_2\) which is the dashed orange line in Figure 3.
+It can be seen that none of the points lie within the feasible region, but now we know that the optimal solution lies within these two lines.
+
+The next value we take for Z is 0.5 and plotting \(Z = 0.4 = 0.0014x_1 + 0.0023x_2\) leads to the dashed yellow line which has a lot of points that are present in the feasible region.
+The value of Z can be further optimised since there are more points below the line for trial 3.
+This leads to our last trial with the value of Z as 0.45. On magnifying the plot, it can be seen that the line for \(Z = 0.45 = 0.0014x_1 + 0.0023x_2\) bisects the feasible region in two places and there is small region
+below the line which is in the feasible region. This gives us our optimal value of Z which is 0.4493 and the optimal cost function line is represented in green in Figure 3.
+The line passes through the point \((214.3146, 64.9150)\) which means that the optimal solution is \(x_1 = 214.3146 \) and \(x_2 = 64.9150\).
+
+\begin{lstlisting}[numbers=none]
+
+  % Defines objective coefficient matrix
+  f = [0.0014 0.0023];
+  
+  % Defines LHS inequality constraint coefficient matrix
+  A = [
+      -1.3 -1.87;
+      1.3 1.87;
+      -0.0354 -0.1142;
+      -0.2522 -0.2976;
+      -0.0038 -0.0308;
+      0.0038 0.0308;
+      0.00126 0.00273];
+  
+  % Defines RHS inequality constraint coefficient matrix
+  b = [ -400 500 -15 -60 -2 8 0.8 ];
+  
+  % Defines lower bound
+  lb = [0 0];
+  
+  % Defines upper bound (for plotting the axis)
+  ub = [400 400];
+  
+  % Plots the feasible region
+  plotregion(-A, -b, lb, ub, [0.3010 0.7450 0.9330]);
+  
+  figure(1)
+  xlabel('x1: Rice'), ylabel('x2: Lentil')
+  axis([lb(1) ub(1) lb(2) ub(2)]), grid
+  hold on
+  
+  % Computes vectors for plotting constraint lines
+  x1 = lb(1):ub(1); % Lower bounds
+  x2 = lb(2):ub(2); % Upper bounds
+  
+  % Compute lines to get solution graphically 
+  % Z = 0.0014 * x1 + 0.0023 * x2
+  
+  trial_1 = 0.6;
+  x2_trial_1 = (-0.0014 .* x1 + trial_1) / 0.0023; 
+  
+  trial_2 = 0.4;
+  x2_trial_2 = (-0.0014 .* x1 + trial_2) / 0.0023;
+  
+  trial_3 = 0.5;
+  x2_trial_3 = (-0.0014 .* x1 + trial_3) / 0.0023;
+  
+  trial_4 = 0.45;
+  x2_trial_4 = (-0.0014 .* x1 + trial_4) / 0.0023;
+  
+  % Compute optimal cost function line
+  optimal_value = 0.4493;
+  x2_cf = (-0.0014 .* x1 + optimal_value) / 0.0023;
+  
+  % Create the object used for plotting the constraints
+  obj = plot(x1, x2_trial_1, x1, x2_trial_2, x1, x2_trial_3, x1, x2_trial_4, x1, x2_cf);
+  
+  % Updates the styles of the plots of the constraints
+  obj(1).LineStyle = '--';
+  
+  obj(2).LineStyle = '-.';
+  
+  obj(3).LineStyle = '--';
+  
+  obj(4).LineStyle = '-.';
+  
+  obj(5).LineStyle = '-';
+  obj(5).Color = 'g';
+  
+  % Creates the legend for the constraints lines
+  legend(obj, {'Trial 1: Z = 0.6 = 0.0014 * x1 + 0.0023 * x2', ...
+      'Trial 2: Z = 0.4 = 0.0014 * x1 + 0.0023 * x2', ...
+      'Trial 3: Z = 0.5 = 0.0014 * x1 + 0.0023 * x2', ...
+      'Trial 4: Z = 0.45 = 0.0014 * x1 + 0.0023 * x2', ...
+      'Optimal Value = Z = 0.4493 = 0.0014 * x1 + 0.0023 * x2'})
+  
+\end{lstlisting}
+
+\hypertarget{matlab-implementation}{%
+	\subsection{Matlab Implementation}\label{matlab-implementation}}
+
+\begin{lstlisting}
+  % Define decision variables
+  x1 = optimvar('Rice', 'LowerBound', 0);
+  x2 = optimvar('Lentil', 'LowerBound', 0);
+  
+  prob = optimproblem('Objective', 0.0014 * x1 + 0.0023 * x2, 'ObjectiveSense', 'min');
+  
+  % Calorie constraints
+  prob.Constraints.c1 = 1.3 * x1 + 1.87 * x2 >= 400;
+  prob.Constraints.c2 = 1.3 * x1 + 1.87 * x2 <= 500;
+  
+  % Protein constraint
+  prob.Constraints.c3 = 0.0354 * x1 + 0.1142 * x2 >= 15;
+   
+  % Carbohydrate constraint
+  prob.Constraints.c4 = 0.2522 * x1 + 0.2976 * x2 >= 60;
+   
+  % Fat constraints
+  prob.Constraints.c5 = 0.0038 * x1 + 0.0308 * x2 >= 2;
+  prob.Constraints.c6 = 0.0038 * x1 + 0.0308 * x2 <= 8;
+   
+  % Sodium constraints
+  prob.Constraints.c7 = 0.00126 * x1 + 0.00273 * x2 <= 0.8;
+  
+  problem = prob2struct(prob);
+  
+  problem.options = optimoptions('linprog', 'Algorithm', 'interior-point', 'Display', 'iter');
+  [val, fval, exitflag, output] = linprog(problem);
+\end{lstlisting}
+
+\newpage
+
+\hypertarget{solution}{%
+	\subsection{Solution}\label{solution}}
+Solving the linear programming model led to the optimal Z value of \textbf{0.4493} which means that a bowl of Khichdi can be cooked for 0.4493 pounds.
+
+The optimal values of the decision variables for \(x_1\) and \(x_2\) were \textbf{214.3146} and \textbf{64.9150}. 
+This means for cooking the most cost-efficient bowl of Khichdi would require 214.3146 grams of rice and 64.9150 grams of lentil.
+
+\hypertarget{sensitivity-analysis}{%
+	\subsection{Sensitivity Analysis}\label{sensitivity-analysis}}
+
+The estimates were perturbed to assess the solution. There were two sets of analysis done:
+\begin{itemize}
+	\item The right-hand side values of the constraint set $\symbfit{b} = \{b_1, b_2, ..., b_7\}$ were reduced to see how the optimal solution changed.
+	\item The objective coefficients $\symbfit{c} = \{c_1, c_2 \}$ were modified to find the allowable range where the optimal solution does not change.
+\end{itemize}
+
+\vspace{4em}
+
+\begin{enumerate}
+	\item \textbf{Changes in \(b_i\)}\\
+	      \\
+	      On reducing the lower bound of constraint for number of calories \(c_1\) from 400 to 350 leads to a decrease in the of objective value.
+	      The optimal solution changes from $\left(214.3152, 64.9145\right)$ to $\left(144.9029, 86.4312\right)$. This causes the Z to be reduced from \pounds 0.4493 to \pounds 0.4017 which is a reduction of 0.0476 or around 10.6\%.
+	      	          
+	      \begin{figure}[ht]
+	      	\begin{subfigure}{.5\textwidth}
+	      		\centering
+	      		\includegraphics[width=1\linewidth]{image6.png}  
+	      		\caption{Feasible region when \(b_1 = 400 → 350\)}
+	      		\label{fig:sub-first}
+	      	\end{subfigure}
+	      	\begin{subfigure}{.5\textwidth}
+	      		\centering
+	      		% include second image
+	      		\includegraphics[width=1\linewidth]{image7.png}  
+	      		\caption{Feasible region when \(b_3 = 15 → 14\)}
+	      		\label{fig:sub-second}
+	      	\end{subfigure}
+	      	\caption{Sensitivity analysis with binding constraints}
+	      	\label{fig:fig}
+	      \end{figure}
+	      	          
+	      This is demonstrated in Figure 4(a) where the blue line is the new constraint line which causes the optimal value to decrease. The rate at which Z will decrease by decreasing $b_1$ is known as the shadow price $y_1^\ast$. 
+	      	          
+	      The shadow price is calculated below and was verified using the slack variables in the final simplex table. It should be noted that this holds true for decreasing $b_1$ till 340 beyond which there is no decrease in the Z value.
+	      This is because the constraint for carbohydrate becomes binding for the solution. The shadow price $y_1^\ast$ for $b_1$ is given by:
+	      \[ 1.3x_1 + 1.87x_2 \ge 350 \rightarrow  0.0014\left( 144.9029\right) + 0.0023\left(86.4312\right) = 0.4017\]
+	      \[ \Delta Z = 0.4017 -0.4493 = -0.0476 \]
+	      \[ Shadow Price = \frac{\Delta Z}{\Delta b_1} = -0.0001 = y_1^\ast\]
+	      	      
+	      On reducing the lower bound of constraint for quantity of protein in a diet \(c_3\), there is a change in the optimal solution and a decrease in the \textbf{Z} value.
+	      This is shown in Figure 4(b) where the new constraint line causes the feasible region to expand allowing the optimal solution to be changed. The dashed red line is the original constraint which internally intersects the feasible region now.
+	      The decrease in the objective value is visible from the graph. 
+	      	          
+	      Decreasing the lower bound from 15g to 14g leads to the optimal solution changing from $\left(214.3152, 64.9145\right)$ to $\left(237.0475, 49.1114\right)$.
+	      This causes the Z to be reduced from \pounds 0.4493 to \pounds 0.4448 which is a reduction of 0.0045 or 10\%. 
+	      	          
+	      Thus, the shadow price $y_2^\ast$ gives the rate at which Z will decrease by slightly decreasing $b_3$.
+	      The optimal solution changes until 12.99 beyond which the constraint for fat $c_5$ becomes binding for the feasible region.
+	      	      
+	      \[ 0.0354x_1 + 0.1142x_2 \ge 14 \rightarrow  0.0014\left( 237.0475\right) + 0.0023\left(49.1114\right) = 0.4448\]
+	      \[ \Delta Z =0.4448 - 0.4493 = -0.0045 \]
+	      \[ Shadow Price = \frac{\Delta Z}{\Delta b_2} = -0.0045 = y_3^\ast\]
+	      	      
+	      The modification of the lower bounds of the above constraints cause the price of a meal to be lowered. 
+	      Both these constraints have a positive shadow price (for minimisation) and are thus known as \textbf{binding constraints}.
+	      The protein constraint $c_3$ has a larger shadow price and thus a unit decrease in the parameter would cause a larger decrease in the Z value.
+	      These modifications to the bounds were done to test the sensitivity of the model to these estimates and can correspond to real world use cases of a diet meal or a low protein meal.
+	      The next section and the MIP sensitivity analysis covers a more realistic requirement of finding a cheaper ingredient or changing the ingredient all together.
+	      	      
+	      Modifying any of the other constraint values do not have an effect on the optimal solution. This corresponds to reading from the final simplex table where the shadow prices for these constraints are zero.
+	      Thus, the constraints for carbohydrates, fat and sodium are \textbf{non-binding constraints}. Even a change in the upper bounds on calorie and protein do not affect the solution.
+	      This is due to the surplus of such resources. This can be seen in Table 4 which shows the concentration of each nutrient in the optimal solution. 
+	      For example, protein is present at the lower bound of the constraint and any reduction in this constraint will reduce its concentration whereas there is a surplus in the case of carbohydrates.
+	      	      
+	      \begin{table}[h!]
+	      	\centering
+	      	\begin{tabular}{||c | c | c | c ||} 
+	      		\hline
+	      		Nutrient          & Amount present & Lower bound & Upper bound \\ [0.5ex] 
+	      		\hline\hline
+	      		Energy (kcal)     & 400            & 400         & 500         \\ 
+	      		Carbohydrates (g) & 73.3688        & 60          & -           \\
+	      		Protein (g)       & 15             & 15          & -           \\
+	      		Fat (g)           & 2.8138         & 2           & 8           \\
+	      		Sodium (g)        & 0.4473         & -           & 0.8         \\ [1ex] 
+	      		\hline
+	      	\end{tabular}
+	      	\caption{Nutritional density in 1 meal of Khichdi}
+	      	\label{table:2}
+	      \end{table}
+	      	          
+	\item \textbf{Changes to the coefficient of the basic variables} \\
+	      \\
+	      To cook a meal of Khichdi, the rice being used is Basmati rice which is an expensive Indian variant of rice. What would be the effect of using another variant of rice which is not as expensive?
+	      This can be simulated by modifying the parameters of the model. In this case we will reduce the coefficients in the objective function $\symbfit{c} = \{c_1, c_2 \}$ and analyse the effect on the optimal solution.
+	      As shown in Figure 5(a), reducing the coefficient $c_1$ from 0.0014 to 0.001 reduces the Z value to 0.3636. This is a 19\% reduction in the optimal value of 0.4493.
+	      	        
+	      \begin{figure}[ht]
+	      	\begin{subfigure}{.5\textwidth}
+	      		\centering
+	      		\includegraphics[width=1\linewidth]{image8.png}  
+	      		\caption{\(c_1 = 0.0014 → 0.008\)}
+	      		\label{fig:sub-first}
+	      	\end{subfigure}
+	      	\begin{subfigure}{.5\textwidth}
+	      		\centering
+	      		% include second image
+	      		\includegraphics[width=1\linewidth]{image9.png}  
+	      		\caption{\(c_2 = 0.0023 → 0.0021\)}
+	      		\label{fig:sub-second}
+	      	\end{subfigure}
+	      	\caption{Sensitivity analysis with objective coefficients}
+	      	\label{fig:fig}
+	      \end{figure}
+	      	      
+	      It should be noted that the graph also shows the range that the objective function
+	      can be change and retain the optimal solution $\left(214.3152, 64.9145\right)$. The Z value changes, but the optimal solution is still the same and hence it is not a sensitive parameter.
+	      Keeping $c_2$ as 0.0023, the allowable range for $c_1$ is \(0.0008 \le c_1 \le 0.0015\). $c_1$ can take any value in this range and the optimal solution will remain unaffected while the Z value will change since the slope of the line is preserved.
+	      	        
+	      Similar to $c_1$, the coefficient $c_2$ was modified to find the allowable range between which it can be modified without changing the solution.
+	      As it can be seen from Figure 5(b), $c_2$ can have any value in the range $c_2$ is \(0.0021 \le c_2 \le 0.0045\) while $c_1$ is fixed.
+	      The effect of reducing $c_2$ to 0.0021 can be seen on the graph where the Z value changes to 0.4364 which yields around a 3\% reduction.
+\end{enumerate}
+
+
+The sensitivity analysis was supplemented using the \textit{MOSEK Optimization Toolbox for MATLAB} which is capable of solving large-scale optimisation problems.
+The constraint set was converted into a sparse matrix and each of the estimated parameters were iteratively analysed using the built-in tools for sensitivity analysis.
+The results coincided with the findings presented above using the simplex tableau and graphical method using MATLAB. The following is the code for running sensitivity analysis using MOSEK.
+
+\begin{lstlisting}
+  [r,res]  = mosekopt('symbcon');
+  sc       = res.symbcon;
+
+  % Specify the c vector.
+  prob.c  = [0.0014 0.0023]';
+
+  % Specify a in sparse format.
+  subi   = [1 1 2 2 3 3 4 4 5 5];
+  subj   = [1 2 1 2 1 2 1 2 1 2];
+  valij  = [1.3 1.87 0.0354 0.1142 0.2522 0.2976 0.0038 0.0308 0.00126 0.00273];
+
+  prob.a = sparse(subi,subj,valij);
+
+  % Specify lower bounds of the constraints.
+  prob.blc = [400 15 60 2 -inf]';
+
+  % Specify  upper bounds of the constraints.
+  prob.buc = [500 inf inf 8 0.8]';
+
+  % Specify lower bounds of the variables.
+  prob.blx = zeros(2,1);
+
+  % Specify upper bounds of the variables.
+  prob.bux = [inf inf]';
+
+  % analyse upper bound 1:7
+  prob.prisen.cons.subl = [1];
+  prob.prisen.cons.subu = [];
+  % analyse lower bound on variables 1:7
+  prob.prisen.vars.subl = [];
+  prob.prisen.vars.subu = [];
+  % analyse coeficient 1:7
+  prob.duasen.sub = [1:2];
+  % Perform the optimization.
+  [r,res] = mosekopt('minimize',prob) 
+\end{lstlisting}
+ 
+\newpage
+
+\hypertarget{mixed-integer-programming-problem}{%
+	\section{Mixed-integer Programming
+	 Problem}\label{mixed-integer-programming-problem}}
+
+\hypertarget{problem-description-1}{%
+	\subsection{Problem Description}\label{problem-description-1}}
+
+In the previous section we identified the concentration of rice and lentil in Khichdi which
+is cost-efficient and contains the recommended amount of nutrients that should be present in a meal.
+
+However, the meal did not cover micronutrients that are also needed by the human body.
+Micronutrients are organic substances that are commonly referred to as vitamins and minerals.
+They are required in small amounts in a meal, but daily consumption is recommended.
+Micronutrients are required for preventing diseases and general wellbeing.
+
+Vitamin C is one of the most important micronutrients and is not produced in the human body.
+The recommended intake for vitamin C in a meal is 100 mg. Lemon is a citrus fruit that is
+extremely rich in vitamin C. 
+
+Compared to rice and lentil that can be bought in fractional values at local vendors, fruits can only be bought in integer values.
+Following are the nutritional and price densities per a single fruit of a lemon:
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{||c | c ||} 
+		\hline
+		Nutrient                & Quantity in 1 Lemon (g) \\ [1ex] 
+		\hline\hline
+		Carbohydrates           & 8                       \\
+		Protein                 & 0.9                     \\
+		Fat                     & 0.3                     \\
+		Sodium                  & 0.0017                  \\
+		Vitamin C               & 0.053                   \\ [1ex] 
+		\hline
+		Energy (kcal / serving) & 24                      \\ 
+		\hline
+		Price (£ / serving)    & 0.2                     \\ [1ex] 
+		\hline
+	\end{tabular}
+	\caption{Nutritional density and price per Lemon}
+	\label{table}
+\end{table}
+
+The problem is to identify the optimal quantity of rice, lentil in grams and optimal integer quantity of lemons to be consumed
+which minimise the total cost per meal and also satisfy the original nutritional constraints along with the added constraint of vitamin C.
+
+\hypertarget{decision-variables-1}{%
+	\subsection{Decision variables}\label{decision-variables-1}}
+
+There are two sets of decision variables in the optimisation problem. As identified before, the quantities of lemons are not continuous i.e. they cannot be bought in fractional values.
+So the two sets and the three decision variables are:
+\begin{itemize}
+	\item The continuous decision variables represented by \(X\)
+	      \begin{enumerate}
+	      	\item The amount in grams of rice which needs to be consumed and is denoted by \(x_1\)
+	      	\item The amount in grams of lentil which needs to be consumed and is denoted by \(x_2\)
+	      \end{enumerate}
+	      \[ X \in \{Rice, Lentil \}\]
+	\item The discrete decision variables represented by \(Y\)
+	      \begin{enumerate}
+	      	\item The number of lemons needed to be consumed and which are denoted by \(y_1\)
+	      \end{enumerate}
+	      \[ Y \in \{Lemon\}\]
+\end{itemize}
+
+
+\hypertarget{objective-function-1}{%
+	\subsection{Objective function}\label{objective-function-1}}
+
+The objective function is to minimise the total cost of one meal of Khichdi along with lemons to satisfy vitamin C constraint.
+A new component for calculating the total cost of the fruits is added to the original cost function.
+It can be written as the sum of the product of the quantity of the fruits and the cost of buying 1 fruit.
+
+Now the cost function and the objective looks like
+\[ \min \quad \sum_{x\in X} c_ix_i + \sum_{y\in Y} c_jy_j \]
+
+The above equation can be simplified to the three decision variables which are used to represent rice, lentil and lemons. 
+Putting the cost values of rice and lentil gives us the objective function which needs to be minimised.
+
+\begin{equation}
+	\min \quad cost(x_1, x_2, y_1) = Z = 0.0014x_1 + 0.0023x_2 + 0.2y_1
+\end{equation}
+
+\hypertarget{problem-constraints-1}{%
+	\subsection{Problem constraints}\label{problem-constraints-1}}
+
+The following changes have to be made to constraint set used for the linear programming problem:
+\begin{itemize}
+	\item Addition of an integrality constraint since \(y_1\) cannot be bought in fractional quantities
+	\item The original constraints need to be updated to include the new decision variable that represent the integer quantity of the lemons
+	\item A new constraint needs to be added for the recommended vitamin C intake per meal
+\end{itemize}
+
+The updated constraints are following:
+\begin{enumerate}
+	\item \textbf{Calorie constraints}: 
+	      \begin{itemize}
+	      	\item A meal should have at least 400 calories.
+	      	      A gram of rice has 1.3 calories while a gram of lentil has 1.87 calories. 1 Lemon has 24 calories.
+	      	      \begin{equation}
+	      	      	1.3x_1 + 1.87x_2 + 24y_1 \ge 400
+	      	      \end{equation}
+	      	\item A meal should have at most 500 calories
+	      	      \begin{equation}
+	      	      	1.3x_1 + 1.87x_2 + 24y_1 \le 500
+	      	      \end{equation}
+	      \end{itemize}
+	\item \textbf{Carbohydrates constraint}:
+	      	      
+	      A meal should have at least 60 grams of carbohydrates. A gram of rice has 0.2522 grams of carbohydrates while a gram of lentil has 0.2976 grams of carbohydrates.
+	      1 lemon has 8g of carbohydrates.
+	      \begin{equation}
+	      	0.2522x_1 + 0.2976 + 8y_1 \le 60
+	      \end{equation}
+	\item \textbf{Protein constraint}:
+	      	      
+	      A meal should have at least 15 grams of proteins. A gram of rice has 0.0354 grams of proteins while a gram of lentil has 0.1142 grams of proteins.
+	      1 Lemon has 0.9g of proteins.
+	      \begin{equation}
+	      	0.0354x_1 + 0.1142x_2 + 0.9y_1 \ge 15
+	      \end{equation}
+	\item \textbf{Fat constraints}: 
+	      \begin{itemize}
+	      	\item A meal should have at least 2 grams of fat.
+	      	      A gram of rice has 0.0038 grams of fat while a gram of lentil has 0.0308 grams of fat.
+	      	      1 lemon has 0.3g of fat.
+	      	      \begin{equation}
+	      	      	0.0038x_1 + 0.0308x_2 + 0.3y_1 \ge 2
+	      	      \end{equation}
+	      	\item A meal should have at most 8 grams of fat.
+	      	      \begin{equation}
+	      	      	0.0038x_1 + 0.0308x_2 + 0.3y_1 \le 8
+	      	      \end{equation}
+	      \end{itemize}
+	\item \textbf{Sodium constraint}:
+	      	      
+	      A meal should have at most 0.8 grams of sodium. A gram of rice has 0.00126 grams of sodium while a gram of lentil has 0.00273 grams of sodium.
+	      1 lemon has 0.0017g of sodium.
+	      \begin{equation}
+	      	0.00126x_1 + 0.00273x_2 + 0.0017y_1 \le 0.8
+	      \end{equation}
+	\item \textbf{Vitamin C constraint}:
+	      	      
+	      A meal should have at least 0.1 grams of vitamin C. Both rice and lentil do not contain any vitamin C while 1 lemon has 0.053 g of vitamin C.
+	      \begin{equation}
+	      	0.053y_1 \le 0.1
+	      \end{equation}
+  \item \textbf{Integrality constraint}:
+	      A lemon can only be bought in discrete value and hence should be an integer.
+	      \begin{equation}
+	      	y_1 \in \mathbb{Z}
+	      \end{equation}
+  \item \textbf{Non-negativity constraints}:
+  The quantity of rice, lentil and lemons should not be negative, so each variable should have a lower bound of 0.
+  \begin{equation}
+    x_1 > 0
+  \end{equation}
+  \begin{equation}
+    x_2 > 0
+  \end{equation}
+  \begin{equation}
+    y_1 > 0
+  \end{equation}
+\end{enumerate}
+
+
+\hypertarget{mathematical-formulation-1}{%
+	\subsection{Mathematical formulation}\label{mathematical-formulation-1}}
+
+Sets\\
+\begin{tabular}{ll}
+	$X$ & set of ingredients \\
+	$Y$ & set of fruits      \\
+	$N$ & set of nutrients   \\
+\end{tabular}
+
+Variables\\
+\begin{tabular}{lll}
+	$x_{i}$ & $i\in X$ & grams of ingredient in a meal \\
+	$y_{j}$ & $j\in Y$ & count of fruit in a meal      
+\end{tabular}
+\setcounter{equation}{0}
+
+Objective
+\begin{align}
+	\min \quad
+	  & Z  = 0.0014x_1 + 0.0023x_2 + 0.2y_1 
+\end{align}
+
+Constraints
+\begin{align}
+	1.3x_1 + 1.87x_2 + 42y_1 + 24y_2 \ge 400 \\
+	1.3x_1 + 1.87x_2 + 42y_1 + 24y_2 \le 500 \\
+	0.2522x_1 + 0.2976x_2 + 8y_1 \ge 60      \\
+	0.0354x_1 + 0.1142x_2 + 0.9y_1 \ge 15    \\
+	0.0038x_1 + 0.0308x_2 + 0.3y_1  \ge 2    \\
+	0.0038x_1 + 0.0308x_2 + 0.3y_1 \le 8     \\
+	0.13x_1 + 0.27x_2 + 0.0017y_1 \le 0.8    \\
+	0.053y_1 \ge 0.1                         \\
+	x_1 > 0                                  \\
+	x_2 > 0                                  \\
+	y_1 > 0                                  \\
+	y_2 > 0                                  
+\end{align}
+\setcounter{equation}{0}
+
+\newpage
+\hypertarget{matlab-implementation-1}{%
+	\subsection{Matlab Implementation}\label{matlab-implementation-1}}
+
+\begin{lstlisting}
+  x1 = optimvar('Rice', 'LowerBound', 0);
+  x2 = optimvar('Lentil', 'LowerBound', 0);
+  y1 = optimvar('Lemon', 'Type', 'integer', 'LowerBound', 0);
+  
+  prob = optimproblem('Objective', 0.0014 * x1 + 0.0023 * x2 + 0.2 * y1, 'ObjectiveSense', 'min');
+  
+  % Calorie constraints
+  prob.Constraints.c1 = 1.3 * x1 + 1.87 * x2 + 24 * y1 >= 400;
+  prob.Constraints.c2 = 1.3 * x1 + 1.87 * x2 + 24 * y1 <= 500;
+  
+  % Protein constraint
+  prob.Constraints.c3 = 0.0354 * x1 + 0.1142 * x2 + 0.9 * y1 >= 15;
+  
+  % Carbohydrate constraint
+  prob.Constraints.c4 = 0.2522 * x1 + 0.2976 * x2 + 8 * y1 >= 60;
+  
+  % Fat constraints
+  prob.Constraints.c5 = 0.0038 * x1 + 0.0308 * x2 + 0.3 * y1 >= 2;
+  prob.Constraints.c6 = 0.0038 * x1 + 0.0308 * x2 + 0.3 * y1 <= 8;
+  
+  % Sodium constraints
+  prob.Constraints.c7 = 0.00126 * x1 + 0.00273 * x2 + 0.0017 * y1 <= 0.8;
+  
+  % Vitamin C constraints
+  prob.Constraints.c8 = 0.053 * y1 >= 0.1;
+  
+  problem = prob2struct(prob);
+  problem.intcon = 1; % decision variable index is not in order of definition
+  
+  [x, fval] = intlinprog(problem);
+\end{lstlisting}
+
+\hypertarget{solution-1}{%
+	\subsection{Solution}\label{solution-1}}
+
+Solving the linear programming model led to the optimal Z value of \textbf{0.7954}.
+This means that a bowl of Khichdi along with lemons, which satisfies the nutritional values per meal and is optimised for minimal cost, can be cooked for 0.7954 pounds.
+
+The optimal values of the decision variables for \(x_1\), \(x_2\), \(y_1\) were \textbf{188.5974}, \textbf{57.1248}, \textbf{2} respectively. 
+This means for cooking the most cost-efficient bowl of Khichdi along with lemons would require 188.5974 grams of rice, 57.1248 grams of lentil and 2 lemons.
+
+\newpage
+
+\hypertarget{sensitivity-analysis-1}{%
+	\subsection{Sensitivity Analysis}\label{sensitivity-analysis-1}}
+
+There were three sets of analysis done as part of the post-optimality steps:
+\begin{itemize}
+	\item The right-hand side values of the constraint set $\symbfit{b} = \{b_1, b_2, ..., b_8\}$ were reduced to see how the optimal solution changed.
+	\item The objective coefficients $\symbfit{c} = \{c_1, c_2, c_3 \}$ were modified to find the allowable range where the optimal solution does not change.
+	\item An ingredient was added to simulate a real-life scenario which led to an addition of a decision variable to the objective function and constraints.
+\end{itemize}
+
+\vspace{4em}
+
+\begin{enumerate}
+	\item \textbf{Changes in \(b_i\)}\\
+	      \\
+	      The behaviour of the constraints solely binding the integer decision on perturbation is different from that binding the continuous variables.
+	      The reduction in Z value is discrete as well or in steps. This can be observed by reducing $b_8$ which is the right-hand side of the vitamin C constraint $c_8$.
+	      Decreasing $b_8$ from 0.1 to 0.06 does not lead to any change in either the optimal solution nor the Z value. When $b_8$ is 0.05 the solution changes from $\left(188.5974, 57.5551, 2\right)$ to $\left(201.4563, 61.0197, 1\right)$.
+	      Instead of having two lemons, the meal now contains one lemon and slight increase in the other ingredients. The Z value reduces from \pounds 0.7954 to \pounds 0.6224. This is a 20\% decrease in the objective value.
+	      	      
+	      On reducing the lower bound of constraint for number of calories \(C_1\) from 400 to 399 leads to a decrease in the of objective value as well.
+	      The optimal solution changes from $\left(188.5974, 57.5551, 2\right)$ to $\left(187.2092, 57.5551, 2\right)$. This causes the Z to be reduced from \pounds 0.7954 to \pounds 0.7945 which is a reduction of 0.0011 or around 0.1\%.
+	      	          
+	      Similarly, reducing the lower bound of constraint for quantity of protein in a diet \(C_3\), there is a change in the optimal solution and a decrease in the \textbf{Z} value.    
+	      Decreasing the lower bound from 15g to 14g leads to the optimal solution changing to $\left(211.3297, 41.3216, 2\right)$.
+	      This causes the Z to be reduced from \pounds 0.7954 to \pounds 0.7909 which is a reduction of 0.0045 or 0.6\%. 
+	      	          
+	      The modification of the lower bounds of the above constraints cause the price of a meal to be lowered and are thus known as \textbf{binding constraints}.
+	      The protein constraint $c_3$ causes a larger reduction in the Z value than the calorie constraint. The vitamin C constraint causes a significant change in the Z value, but this would only happen once since the next decrease would reduce the quantity to 0.
+	      	      
+	      Modifying any of the other constraint values do not have an effect on the optimal solution and thus the constraints for carbohydrates, fat and sodium are \textbf{non-binding constraints}. 
+	      Even a change in the upper bounds on calorie and protein do not affect the solution.
+	      This is due to the surplus of such resources. This can be seen in Table 6 which shows the concentration of each nutrient in the optimal solution. 
+	      For example, protein is present at the lower bound of the constraint and any reduction in this constraint will reduce its concentration whereas there is a surplus in the case of carbohydrates.
+	      	      
+	      \begin{table}[h!]
+	      	\centering
+	      	\begin{tabular}{||c | c | c | c ||} 
+	      		\hline
+	      		Nutrient          & Amount present & Lower bound & Upper bound \\ [0.5ex] 
+	      		\hline\hline
+	      		Energy (kcal)     & 400            & 400         & 500         \\ 
+	      		Carbohydrates (g) & 80.5646        & 60          & -           \\
+	      		Protein (g)       & 15             & 15          & -           \\
+	      		Fat (g)           & 3.0761         & 2           & 8           \\
+	      		Sodium (g)        & 0.3970         & -           & 0.8         \\
+	      		Vitamin C         & 0.106          & 0.1         & -           \\[1ex] 
+	      		\hline
+	      	\end{tabular}
+	      	\caption{Nutritional density in 1 meal of Khichdi with lemons}
+	      	\label{table:2}
+	      \end{table}
+	      	          
+	\item \textbf{Changes to the coefficient of the basic variables} \\
+	      \\
+	      What would happen to our optimal solution if we found a cheaper version of lemon? As previously stated, this can be simulated by changing the coefficients of the objective function $\symbfit{c} = \{c_1, c_2, c_3 \}$.
+	      Reducing the coefficient $c_3$, which is the cost of a lemon, from 0.2 to 0.1 reduces the Z value to 0.5954. This is a 25\% reduction in the optimal value of 0.7954.
+	      However, the optimal solution does not change with the decrease in the Z value and thus $c_3$ is not a sensitive parameter.
+	      With the other coefficients fixed, the allowable range for $c_3$ is \(0.03 \le c_3\). $c_1$ can take any value in this range and the optimal solution will remain unaffected. The range does not have an upper bound since the vitamin C constraint just binds $y_1$.
+	      	        
+	      Similar to $c_3$, the coefficients $c_1$ and $c_2$ was modified to find the allowable range between which it can be modified without changing the solution.
+	      $c_1$ can have any value in the range \(0.0008 \le c_1 \le 0.0015\) and the optimal solution does not change. Reducing $c_1$ to 0.001 decreases the Z value to 0.7200 which is a 9.5 \% reduction.
+	      Modifying the value of $c_2$ yields the allowable range of \(0.0021 \le c_1 \le 0.0045\) where the objective value changes, but the solution does not. Changing $c_2$ to 0.021 leads to a 1.5\% decrease in the Z value to \pounds 0.7840.
+	      	      
+	      It can be inferred that none of the variables are sensitive since each of the variables have an allowable range of perturbation where the optimal solution is retained and the Z value changes accordingly.
+	      	        
+	\item \textbf{Adding a new variable}
+	      In order to simulate a real life scenario which would test the optimality of the solution, the problem was modified by adding oranges to the mix as well.
+	      Oranges are an excellent source of vitamin C as well and can be included in the diet along with or even instead of lemons. The simulation required an addition of a decision variable to the existing objective function and constraints.
+	      The price and nutrition of an orange is as follows:
+	      \begin{table}[h!]
+	      	\centering
+	      	\begin{tabular}{||c | c ||} 
+	      		\hline
+	      		Nutrient                & Quantity in 1 Orange (g) \\ [1ex] 
+	      		\hline\hline
+	      		Carbohydrates           & 1.8                      \\
+	      		Protein                 & 1.3                      \\
+	      		Fat                     & 0.2                      \\
+	      		Sodium                  & 0.0014                   \\
+	      		Vitamin C               & 0.0532                   \\ [1ex] 
+	      		\hline
+	      		Energy (kcal / serving) & 69                       \\ 
+	      		\hline
+	      		Price (£ / serving)    & 0.4                      \\ [1ex] 
+	      		\hline
+	      	\end{tabular}
+	      	\caption{Nutritional density and price per Orange}
+	      	\label{table}
+	      \end{table}
+	      	        
+	      The above values were used to add a new decision variable to the objective function and the constraints.
+	      Solving the problem gave the optimal solution of $\left(188.5974, 57.5551, 2, 0\right)$ with the Z value being \pounds 0.7954.
+	      The solution did not change due to the addition of a new decision variable. This might have been expected since both lemons and oranges are nutritionally same, but an orange costs more.
+	      	        
+	      In order to test the optimality further, the cost of an orange was reduced i.e. $c_4$ to \pounds 0.2. This led to a change in the optimal solution which was now $\left(135.2192, 70.1685, 1, 1\right)$.
+	      The Z value also marginally reduced to \pounds 0.7507. Thus using a lemon and an orange will give a slightly more optimal solution that two lemons if they are priced equally.
+\end{enumerate}
+
+\newpage
+
+Following is the code used to modify the problem by adding quantity of an orange as a decision variable:
+\begin{lstlisting}[numbers=none]
+x1 = optimvar('Rice', 'LowerBound', 0);
+x2 = optimvar('Lentil', 'LowerBound', 0);
+y1 = optimvar('Lemon', 'Type', 'integer', 'LowerBound', 0);
+y2 = optimvar('Orange', 'Type', 'integer', 'LowerBound', 0);
+
+prob = optimproblem('Objective', 0.0014 * x1 + 0.0023 * x2 + 0.2 * y1 + 0.4 * y2, 'ObjectiveSense', 'min');
+
+% Calorie constraints
+prob.Constraints.c1 = 1.3 * x1 + 1.87 * x2 + 24 * y1 + 69 * y2 >= 400;
+prob.Constraints.c2 = 1.3 * x1 + 1.87 * x2 + 24 * y1 + 69 * y2 <= 500;
+
+% Protein constraint
+prob.Constraints.c3 = 0.0354 * x1 + 0.1142 * x2 + 0.9 * y1 + 1.3 * y2 >= 15;
+
+% Carbohydrate constraint
+prob.Constraints.c4 = 0.2522 * x1 + 0.2976 * x2 + 8 * y1 + 1.8 * y2 >= 60;
+
+% Fat constraints
+prob.Constraints.c5 = 0.0038 * x1 + 0.0308 * x2 + 0.3 * y1 + 0.2 * y2 >= 2;
+prob.Constraints.c6 = 0.0038 * x1 + 0.0308 * x2 + 0.3 * y1 + 0.2 * y2 <= 8;
+
+% Sodium constraints
+prob.Constraints.c7 = 0.00126 * x1 + 0.00273 * x2 + 0.0017 * y1 + 0.0014 * y2 <= 0.8;
+
+% Vitamin C constraints
+prob.Constraints.c8 = 0.053 * y1 + 0.0532 * y2>= 0.1;
+
+problem = prob2struct(prob);
+problem.intcon = [1, 3]; % decision variable index is not in order of definition
+
+[x, fval] = intlinprog(problem)
+\end{lstlisting}
+
+\newpage
+
+\hypertarget{non-linear-programming-problem}{%
+	\section{Non-Linear Programming
+	 Problem}\label{non-linear-programming-problem}}
+
+\hypertarget{problem-description-2}{%
+	\subsection{Problem Description}\label{problem-description-2}}
+
+In the previous section we identified the concentration of rice and lentil in Khichdi along with the quantity of lemons which
+is cost-efficient and contains the recommended amount of nutrients and micro-nutrients that should be present in a meal.
+
+However, we had assumed that the cost function of the various quantities of the ingredients is linear. 
+This is not the case when it comes to the real world. Bulk pricing is a very common form of nonlinear or elastic pricing.
+Wholesalers and even retailers in the FMCG space often reduce the price as the quantity of the goods bought is increased.
+
+This can be observed when it comes to buying rice, especially at Indian stores. Rice is a staple diet for a large portion of the Indian community and the pricing varies greatly on the amount purchased.
+The following table shows the pricing at such a store:
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c | c |} 
+		\hline
+		Quantity (g) & Price (\pounds) \\ [0.5ex] 
+		\hline\hline
+		100          & 0.077           \\
+		250          & 0.13            \\
+		1000         & 0.40            \\ 
+		2000         & 0.75            \\
+		5000         & 1.66            \\
+		10000        & 2.78            \\
+		[1ex] 
+		\hline
+	\end{tabular}
+	\caption{Nonlinear pricing of rice}
+	\label{table:2}
+\end{table}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{image10.png}
+	\caption{Non-linear price curve for Rice}
+\end{figure}
+
+Treating the price and quantity as the coordinates and using curve fitting, the pricing of rice can be represented by the following quadratic function and the curve in Figure 6:
+
+\begin{equation*}
+	cost(x_{Rice}) = -1.012 \times 10^{-8} x_{Rice}^2 + 0.000375x_{Rice} + 0.04
+\end{equation*}
+
+Given the non-linear pricing of rice and the integrality constraint on lemons, we aim to find the quantity of rice, lentil and lemons that minimises the cost of sourcing the ingredients and satisfies the nutritional requirements.
+
+
+\hypertarget{decision-variables-2}{%
+	\subsection{Decision variables}\label{decision-variables-2}}
+
+There are two sets of decision variables in the optimisation problem as identified before.
+So the two sets and the three decision variables are:
+\begin{itemize}
+	\item The continuous decision variables represented by \(X\)
+	      \begin{enumerate}
+	      	\item The amount in grams of rice which needs to be consumed and is denoted by \(x_1\)
+	      	\item The amount in grams of lentil which needs to be consumed and is denoted by \(x_2\)
+	      \end{enumerate}
+	      \[ X \in \{Rice, Lentil \}\]
+	\item The discrete decision variables represented by \(Y\)
+	      \begin{enumerate}
+	      	\item The number of lemons needed to be consumed and which are denoted by \(y_1\)
+	      \end{enumerate}
+	      \[ Y \in \{Lemon\}\]
+\end{itemize}
+
+\hypertarget{objective-function-2}{%
+	\subsection{Objective function}\label{objective-function-2}}
+
+The objective function is to minimise the total cost of one meal of Khichdi along with lemons to satisfy the nutritional constraints.
+A new component for calculating the total cost of the rice through a quadratic function representing the non-linear pricing of rice has been added to the objective.
+
+Now the objective function looks like
+\begin{equation*}
+	\min \quad Z = -1.012 \times 10^{-8} x_1^2 + 0.000375x_1 + 0.04 + 0.0023x_2 + 0.2y_1
+\end{equation*}
+
+
+\hypertarget{problem-constraints-2}{%
+	\subsection{Problem constraints}\label{problem-constraints-2}}
+
+\begin{enumerate}
+	\item \textbf{Calorie constraints}: 
+	      \begin{itemize}
+	      	\item A meal should have at least 400 calories.
+	      	      A gram of rice has 1.3 calories while a gram of lentil has 1.87 calories. 1 Lemon has 24 calories.
+	      	      \begin{equation}
+	      	      	1.3x_1 + 1.87x_2 + 24y_1 \ge 400
+	      	      \end{equation}
+	      	\item A meal should have at most 500 calories
+	      	      \begin{equation}
+	      	      	1.3x_1 + 1.87x_2 + 24y_1 \le 500
+	      	      \end{equation}
+	      \end{itemize}
+	\item \textbf{Carbohydrates constraint}:
+	      	      
+	      A meal should have at least 60 grams of carbohydrates. A gram of rice has 0.2522 grams of carbohydrates while a gram of lentil has 0.2976 grams of carbohydrates.
+	      1 lemon has 8g of carbohydrates.
+	      \begin{equation}
+	      	0.2522x_1 + 0.2976 + 8y_1 \ge 60
+	      \end{equation}
+	\item \textbf{Protein constraint}:
+	      	      
+	      A meal should have at least 15 grams of proteins. A gram of rice has 0.0354 grams of proteins while a gram of lentil has 0.1142 grams of proteins.
+	      1 Lemon has 0.9g of proteins.
+	      \begin{equation}
+	      	0.0354x_1 + 0.1142x_2 + 0.9y_1 \ge 15
+	      \end{equation}
+	\item \textbf{Fat constraints}: 
+	      \begin{itemize}
+	      	\item A meal should have at least 2 grams of fat.
+	      	      A gram of rice has 0.0038 grams of fat while a gram of lentil has 0.0308 grams of fat.
+	      	      1 lemon has 0.3g of fat.
+	      	      \begin{equation}
+	      	      	0.0038x_1 + 0.0308x_2 + 0.3y_1 \ge 2
+	      	      \end{equation}
+	      	\item A meal should have at most 8 grams of fat.
+	      	      \begin{equation}
+	      	      	0.0038x_1 + 0.0308x_2 + 0.3y_1 \le 8
+	      	      \end{equation}
+	      \end{itemize}
+	\item \textbf{Sodium constraint}:
+	      	      
+	      A meal should have at most 0.8 grams of sodium. A gram of rice has 0.00126 grams of sodium while a gram of lentil has 0.00273 grams of sodium.
+	      1 lemon has 0.0017g of sodium.
+	      \begin{equation}
+	      	0.00126x_1 + 0.00273x_2 + 0.0017y_1 \le 0.8
+	      \end{equation}
+	\item \textbf{Vitamin C constraint}:
+	      	      
+	      A meal should have at least 0.1 grams of vitamin C. Both rice and lentil do not contain any vitamin C while 1 lemon has 0.053 g of vitamin C.
+	      \begin{equation}
+	      	0.053y_1 \ge 0.1
+	      \end{equation}
+  \item \textbf{Integrality constraint}:
+	      A lemon can only be bought in discrete value and hence should be an integer.
+	      \begin{equation}
+	      	y_1 \in \mathbb{Z}
+	      \end{equation}
+  \item \textbf{Non-negativity constraints}:
+	      The quantity of rice, lentil and lemons should not be negative, so each variable should have a lower bound of 0.
+	      \begin{equation}
+	      	x_1 > 0
+	      \end{equation}
+	      \begin{equation}
+	      	x_2 > 0
+	      \end{equation}
+	      \begin{equation}
+	      	y_1 > 0
+	      \end{equation}
+\end{enumerate}
+
+\hypertarget{mathematical-formulation-2}{%
+	\subsection{Mathematical formulation}\label{mathematical-formulation-2}}
+
+Sets\\
+\begin{tabular}{ll}
+	$X$ & set of ingredients \\
+	$Y$ & set of fruits      \\
+	$N$ & set of nutrients   \\
+\end{tabular}
+
+Variables\\
+\begin{tabular}{lll}
+	$x_{i}$ & $i\in X$ & grams of ingredient in a meal \\
+	$y_{j}$ & $j\in Y$ & count of fruit in a meal      
+\end{tabular}
+\setcounter{equation}{0}
+
+Objective
+\begin{align}
+	\max \quad
+	  & Z = 1.012 \times 10^{-8} x_1^2 - 0.000375x_1 - 0.04 - 0.0023x_2 - 0.2y_1 
+\end{align}
+
+Constraints
+\begin{align}
+	1.3x_1 + 1.87x_2 + 42y_1 + 24y_2 \ge 400 \\
+	-1.3x_1 - 1.87x_2 - 42y_1 - 24y_2 \ge -500 \\
+	0.2522x_1 + 0.2976x_2 + 8y_1 \ge 60      \\
+	0.0354x_1 + 0.1142x_2 + 0.9y_1 \ge 15    \\
+	0.0038x_1 + 0.0308x_2 + 0.3y_1  \ge 2    \\
+	-0.0038x_1 - 0.0308x_2 - 0.3y_1 \ge -8     \\
+	-0.13x_1 - 0.27x_2 - 0.0017y_1 \ge -0.8    \\
+	0.053y_1 \ge 0.1                         \\
+  y_1 \in \mathbb{Z}                       \\
+	x_1 > 0                                  \\
+	x_2 > 0                                  \\
+	y_1 > 0                                  \\
+	y_2 > 0                                  \\
+\end{align}
+
+\newpage
+
+\hypertarget{matlab-implementation-2}{%
+	\subsection{Matlab Implementation}\label{matlab-implementation-2}}
+
+\begin{lstlisting}[numbers=none]
+
+  % Defines objective coefficient matrix
+  fitness = @(x)-1.012 * 10 ^-9 * x(1) ^ 2 + 0.000375 * x(1) + 0.040 + 0.0023 * x(2) + 0.2 * x(3);
+  
+  % Defines LHS inequality constraint coefficient matrix
+  A = [
+      -1.3 -1.87 -24;
+      1.3 1.87 24;
+      -0.0354 -0.1142 -0.9;
+      -0.2522 -0.2976 -8;
+      -0.0038 -0.0308 -0.3;
+      0.0038 0.0308 0.3;
+      0.00126 0.00273 0.0017;
+      0 0 -0.053];
+  
+  % Defines RHS inequality constraint coefficient matrix
+  b = [ -400 500 -15 -60 -2 8 0.8 -0.1];
+  
+  % Defines lower bound
+  lb = [0 0 0];
+  
+  % Surrogate requires an upper bound
+  ub = [1000 1000 1000];
+  
+  [x, fval] = surrogateopt(fitness,lb, ub, 3, A,b);
+  
+\end{lstlisting}
+\hypertarget{solution-2}{%
+	\subsection{Solution}\label{solution-2}}
+
+Solving the linear programming model led to the optimal Z value of \textbf{0.5941}.
+This means that a bowl of Khichdi along with lemons, which satisfies the nutritional values per meal and is optimised for minimal cost, can be cooked for \pounds 0.5941.
+
+The optimal values of the decision variables for \(x_1\), \(x_2\), \(y_1\) were \textbf{327.4221}, \textbf{14.0916}, \textbf{2} respectively. 
+This means for cooking the most cost-efficient bowl of Khichdi along with lemons would require 327.4221 grams of rice, 14.0916 grams of lentil and 2 lemons.
+
+\hypertarget{sensitivity-analysis-2}{%
+	\subsection{Sensitivity Analysis}\label{sensitivity-analysis-2}}
+
+There were three sets of analysis done as part of the post-optimality steps:
+\begin{itemize}
+	\item The right-hand side values of the constraint set $\symbfit{b} = \{b_1, b_2, ..., b_8\}$ were reduced to see how the optimal solution changed.
+	\item The objective coefficients $\symbfit{c} = \{c_1, c_2, c_3 \}$ were modified to find the allowable range where the optimal solution does not change.
+\end{itemize}
+
+\vspace{4em}
+
+\begin{enumerate}
+	\item \textbf{Changes in \(b_i\)}\\
+	      \\
+	      On reducing the upper bound of constraint for number of calories \(C_2\) from 500 to 499 leads to an increase in the of objective value. This happens due to the increase in amount of lentils which is more costly but has lower calories.
+	      The optimal solution changes from $\left(327.4221, 14.0916, 2\right)$ to $\left(326.0339, 14.5219, 2\right)$. This causes the Z to be increased from \pounds 0.5941 to \pounds 0.5946 which is an increase of around 0.8\%. This perturbation affects the objective negatively.
+	      	          
+	      Contrarily, reducing the lower bound of constraint for quantity of protein in a diet \(C_3\), there is a change in the optimal solution and a decrease in the Z value.    
+	      Decreasing the lower bound from 15g to 14g leads to the optimal solution changing to $\left(328.9049, 4.8754, 2\right)$.
+	      This causes the Z to be reduced from \pounds 0.5941 to \pounds 0.5735 which is a reduction of about 3.5\%. This can be attributed to the fact that lentils are richer in protein but more expensive than rice.
+	      	          
+	      Decreasing $b_8$ from 0.1 to 0.06 does not lead to any change in either the optimal solution nor the Z value. When $b_8$ is 0.05 the solution changes from to $\left(340.2811, 17.9864, 1\right)$.
+	      Instead of having two lemons, the meal now contains one lemon and slight increase in the other ingredients. The Z value reduces from \pounds 0.7954 to \pounds 0.6224. This is a 20\% decrease in the objective value.
+	      	      
+	      The modification of the lower bounds of the above constraints cause the price of a meal to be lowered and are thus known as \textbf{binding constraints}.
+	      Modifying any of the other constraint values do not have an effect on the optimal solution and thus the constraints for carbohydrates, fat and sodium are \textbf{non-binding constraints}. 
+	      	          
+	\item \textbf{Changes to the coefficient of the basic variables} \\
+	      \\
+	      What would happen to our optimal solution if we found cheaper variants of lentil and lemon? As previously stated, this can be simulated by changing the coefficients of the objective function $\symbfit{c} = \{c_1, c_2, c_3 \}$.
+	      Reducing the coefficient $c_2$, which is the cost of a gram of lentil, by one unit from 0.0023 to 0.0022 reduces the Z value to 0.5927. This is a 0.24\% reduction in the optimal value of 0.5941.
+	      However, the optimal solution does not change with the decrease in the Z value and thus $c_2$ is not a sensitive parameter.
+	      With the other coefficients fixed, the allowable range for $c_2$ is \(0.011 \le c_2 \le 0.051\). $c_1$ can take any value in this range and the optimal solution will remain unaffected.
+	      	        
+	      Similar to $c_2$, the coefficient for $c_3$ was modified to find the allowable range between which it can be modified without changing the solution.
+	      $c_2$ can have any value in the range \(0.02 \le c_1 \) and the optimal solution does not change. Reducing $c_2$ to 0.001 decreases the Z value to 0.7200 which is a 9.5 \% reduction.
+	      Similar to the previous section $c_3$ does not have an upper bound due to the vitamin C constraint.
+	      	      
+	      It can be inferred that none of the variables are sensitive since each of the variables have an allowable range of perturbation where the optimal solution is retained and the Z value changes accordingly.
+	      	        
+\end{enumerate}
+
+
+\hypertarget{conclusion}{%
+	\section{Conclusion}\label{conclusion}}
+
+The aim of this exercise was to identify the correct proportions of rice and lentil in a traditional Indian dish called Khichdi which would be cost-efficient and also satisfy the nutritional constraints of a meal.
+The problem was modelled as a linear programming problem and the optimal solution had the objective value of \pounds 0.4493 with 214.3146 grams of rice and 64.9150 grams of lentil.
+Graphical method was also employed to find the optimal solution. Sensitivity analysis was performed on the results to assess the solution and identify binding constraints and sensitive parameters. It was identified that none of the parameters were sensitive and thus affirming the robustness of solution.
+
+In order to include intake of micronutrients in the meal, a vitamin C constraint and lemons were added to the diet. This was modelled as a mixed integer problem due to the discrete nature of buying lemons.
+The optimal solution had the objective value of \pounds 0.7954 with 188.5974 grams of rice, 57.5551 grams of lentil and 2 lemons. As previously, sensitivity analysis was performed to test the robustness of the solution.
+As a part of the latter, oranges were added to the problem to assess the solution in presence of another alternative for vitamin C. 
+
+Lastly, to simulate a real world scenario elastic pricing was introduced which added a non-linear price curve for rice. Due to the nature of bulk pricing, the problem was modelled as a non-linear programming problem and surrogate optimisation was used to extract the optimal solution.
+The optimal solution has the objective value of \pounds 0.5941 with 327.4221 grams of rice, 14.0916 grams of lentil and 2 lemons. The price advantage is visible in the solution which caused rice to be favoured over lentil.
+
+The problem was built on the previous works of Stigler \cite{stigler_1945} and his low cost diet but restricted to a singular meal. 
+Modelling of nutritional density was inspired by the works of Darmon et al. \cite{darmon_ferguson_briend_2002}. 
+
+The problem scope was limited and has a great potential to be expanded and yield valuable results. Following are the additions that can be made:
+\begin{itemize}
+	\item Addition of multiple ingredients such as various different types of lentil which is a common occurrence while cooking Khichdi
+	\item Inclusion of more micronutrients such as phlyate to zinc ratio (P:Z) which can be modelled as a non-linear constraint similar to Darmon et al. \cite{darmon_ferguson_briend_2002}
+	\item A novel formulation of identifying a taste coefficient of each of the included item and adding a constraint that satisfies the taste requirement of the consumer
+	\item Addition of constraint for time spent cooking each ingredient in order to add a time dimension to the problem. The problem can be converted to a multi objective problem as well.
+	\item Augmentation of the ingredients with a satiety index to increase time between meals and evaluate resting energy expenditure similar to Mifflin et al. \cite{mifflin_stjeor_hill_scott_daugherty_koh_1990}
+\end{itemize}
+\printbibliography
+
+\end{document}
